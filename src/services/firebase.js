@@ -1,4 +1,9 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+
+// // Add the Firebase products that you want to use
+// require("firebase/auth");
+// require("firebase/firestore");
+
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -12,8 +17,9 @@ var firebaseConfig = {
     measurementId: "G-C1V4VKLV1D"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+firebaseApp.firestore().settings({ timestampsInSnapshots: true });
 firebase.analytics();
 
-export const auth = firebase.auth;
-export const db = firebase.database()
+// export const auth = firebase.auth;
+// export const db = firebase.database()
