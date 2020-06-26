@@ -1,9 +1,15 @@
 import firebase from 'firebase/app';
 
+// //still not to be used
+//import firestore from "firebase/firestore"
+
 // // Add the Firebase products that you want to use
 // require("firebase/auth");
 // require("firebase/firestore");
 
+// Add the Firebase services that you want to use
+// import "firebase/auth";
+import "firebase/firestore";
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -18,8 +24,11 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 const firebaseApp = firebase.initializeApp(firebaseConfig);
-firebaseApp.firestore().settings({ timestampsInSnapshots: true });
-firebase.analytics();
+
+// firebaseApp.firestore().settings({ timestampsInSnapshots: true });
+// firebase.analytics();
+
+export default firebaseApp.firestore();
 
 // export const auth = firebase.auth;
 // export const db = firebase.database()
