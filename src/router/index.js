@@ -13,9 +13,17 @@ const routes = [
     component: Login
   },
   {
-    path: '/chat/:name?',
+    path: '/chat',
     name: 'Chat',
-    component: Chat
+    component: Chat,
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (to.params.name) {
+        next();
+      } else {
+        next({ name: 'Login' });
+      }
+    }
   },
   {
     path: '/home',
