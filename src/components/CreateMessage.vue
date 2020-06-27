@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import fb from "@/services/firebase";
+
 export default {
   name: "CreateMessage",
   props: {
@@ -33,7 +35,21 @@ export default {
   },
   methods: {
     createMessage() {
-      console.log(this.newMessage);
+      if (this.newMessage) {
+        fb.collection("messages")
+          .add({
+            message: this.newMessage,
+            name: this.name,
+            timestamp: Date.now()
+          })
+          .catch(err => {
+            console.log(err);
+          });
+        this.newMessage = null;
+        this.errorText = null;
+      } else {
+        this.errorText = "A message must be entered!";
+      }
     }
   }
 };
