@@ -22,7 +22,7 @@
 
 <script>
 import CreateMessage from "@/components/CreateMessage";
-import fb from "@/services/firebase";
+import db from "@/services/firebase";
 import moment from "moment";
 
 export default {
@@ -36,12 +36,10 @@ export default {
       messages: []
     };
   },
-  created() {
-    let ref = fb.collection("messages").orderBy("timestamp");
-
-    ref.onSnapshot(snapshot => {
-      snapshot.docChanges().forEach(change => {
-        debugger;
+  mounted() {
+    let ref = db.collection("messages"); //.doc('text')//.orderBy("timestamp");
+    ref.onSnapshot(collection => {
+      collection.docChanges().forEach(change => {
         if (change.type == "added") {
           let doc = change.doc;
           this.messages.push({

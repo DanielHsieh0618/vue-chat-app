@@ -10,6 +10,7 @@ import * as firebase from "firebase/app";
 
 // Add the Firebase services that you want to use
 import "firebase/auth";
+// Required for side-effects
 import "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -24,14 +25,17 @@ const firebaseConfig = {
     measurementId: "G-C1V4VKLV1D"
 };
 // Initialize Firebase
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
+var db = firebase.firestore();
+
+window.db = db;
 
 //index.esm.js?abfd:106 [2020-06-26T08:59:03.125Z]  @firebase/firestore: Firestore (7.15.2): The setting 'timestampsInSnapshots: true' is no longer required and should be removed.
 // firebaseApp.firestore().settings({ timestampsInSnapshots: true });
 // firebase.analytics();
 
-export default firebaseApp.firestore();
+export default db;
 
 // export const auth = firebase.auth;
 // export const db = firebase.database()
