@@ -1,11 +1,13 @@
 <template>
-  <div id="app">
-    <!-- <div id="nav">
+  <v-app id="app">
+    <v-main class="fill-height" fluid>
+      <!-- <div id="nav">
       <router-link to="/">Login</router-link>|
       <router-link to="chat">Chat</router-link>
-    </div>-->
-    <router-view />
-  </div>
+      </div>-->
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
 <style lang="scss">

@@ -1,7 +1,33 @@
 <template>
-  <div class="chat container">
-    <h2 class="text-primary text-center">Real-Time Chat</h2>
-    <h5 class="text-secondary text-center">Powered by Vue.js & Firebase</h5>
+  <div>
+    <v-container class="chat">
+      <h2>Real-Time Chat</h2>
+      <v-card>
+        <v-card-title>
+          <h4>Powered by Vue.js & Firebase</h4>
+        </v-card-title>
+        <v-card-text>
+          <p class="nomessages text-secondary" v-if="messages.length == 0">[No messages yet!]</p>
+          <div class="messages" v-chat-scroll="{always: false, smooth: true}">
+            <div
+              v-for="message in messages"
+              :key="message.id"
+              :class="message.active?'right':'left'"
+            >
+              <span class="text-info">[{{ message.name }}]:</span>
+              <span>{{message.message}}</span>
+              <span class="text-secondary time">{{message.timestamp}}</span>
+            </div>
+          </div>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <CreateMessage :name="name" />
+        </v-card-actions>
+      </v-card>
+    </v-container>
+    <!-- <div class="chat container">
+
     <div class="card">
       <div class="card-body">
         <p class="nomessages text-secondary" v-if="messages.length == 0">[No messages yet!]</p>
@@ -17,6 +43,7 @@
         <CreateMessage :name="name" />
       </div>
     </div>
+    </div>-->
   </div>
 </template>
 
@@ -46,6 +73,7 @@ export default {
             id: doc.id,
             name: doc.data().name,
             message: doc.data().message,
+            active: this.name === doc.data().name,
             timestamp: moment(doc.data().timestamp).format("LTS")
           });
         }
@@ -78,5 +106,13 @@ export default {
 .messages {
   max-height: 300px;
   overflow: auto;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
 }
 </style>
