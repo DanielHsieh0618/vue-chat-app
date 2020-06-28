@@ -5,7 +5,6 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-// import { auth } from './services/firebase'
 import VueChatScroll from 'vue-chat-scroll'
 
 import vuetify from './plugins/vuetify';

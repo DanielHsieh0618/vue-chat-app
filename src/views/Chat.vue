@@ -1,11 +1,8 @@
 <template>
   <div>
     <v-container class="chat">
-      <h2>Real-Time Chat</h2>
       <v-card>
-        <v-card-title>
-          <h4>Powered by Vue.js & Firebase</h4>
-        </v-card-title>
+        <v-toolbar color="primary" dark flat>悄悄話</v-toolbar>
         <v-card-text>
           <p class="nomessages text-secondary" v-if="messages.length == 0">[No messages yet!]</p>
           <div class="messages" v-chat-scroll="{always: false, smooth: true}">
@@ -26,24 +23,6 @@
         </v-card-actions>
       </v-card>
     </v-container>
-    <!-- <div class="chat container">
-
-    <div class="card">
-      <div class="card-body">
-        <p class="nomessages text-secondary" v-if="messages.length == 0">[No messages yet!]</p>
-        <div class="messages" v-chat-scroll="{always: false, smooth: true}">
-          <div v-for="message in messages" :key="message.id">
-            <span class="text-info">[{{ message.name }}]:</span>
-            <span>{{message.message}}</span>
-            <span class="text-secondary time">{{message.timestamp}}</span>
-          </div>
-        </div>
-      </div>
-      <div class="card-action">
-        <CreateMessage :name="name" />
-      </div>
-    </div>
-    </div>-->
   </div>
 </template>
 
@@ -64,7 +43,7 @@ export default {
     };
   },
   mounted() {
-    let ref = db.collection("messages"); //.doc('text')//.orderBy("timestamp");
+    let ref = db.collection("messages").orderBy("timestamp"); //.doc('text')//.orderBy("timestamp");
     ref.onSnapshot(collection => {
       collection.docChanges().forEach(change => {
         if (change.type == "added") {

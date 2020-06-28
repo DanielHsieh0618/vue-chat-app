@@ -1,38 +1,30 @@
 <template>
-  <!-- <div class="container" style="margin-bottom:30px"> -->
   <v-row>
     <v-col>
       <form class="full-width" @submit.prevent="createMessage">
         <div class="d-flex">
           <v-text-field
             type="text"
+            class="mt-0 pt-0"
             name="message"
-            placeholder="Enter message ..."
+            placeholder="請輸入訊息 ..."
             v-model="newMessage"
             hide-details
           ></v-text-field>
-          <span class="text-danger" v-if="errorText">{{errorText}}</span>
-          <v-btn type="submit" color="primary" name="action">Submit</v-btn>
-        </div>
-        <!-- <div class="form-group"> -->
-        <!-- <input
-        type="text"
-        name="message"
-        class="form-control"
-        placeholder="Enter message ..."
-        v-model="newMessage"
-        />-->
-        <!-- <v-text-field type="text" name="message" placeholder="Enter message ..." v-model="newMessage"></v-text-field> -->
-        <!-- <span class="text-danger" v-if="errorText">{{errorText}}</span> -->
-        <!-- </div> -->
 
-        <!-- <button class="btn btn-primary" type="submit" name="action">Submit</button> -->
-        <!-- <v-btn type="submit" color="primary" name="action">Submit</v-btn> -->
+          <v-tooltip bottom>
+            <template #activator="{on}">
+              <v-btn v-on="on" icon type="submit" color="primary" name="action">
+                <v-icon>mdi-arrow-right</v-icon>
+              </v-btn>
+            </template>
+            <span>輸入</span>
+          </v-tooltip>
+        </div>
+        <p class="red--text ma-0 text-caption text-justify" v-if="errorText">{{errorText}}</p>
       </form>
     </v-col>
   </v-row>
-
-  <!-- </div> -->
 </template>
 
 <script>
@@ -66,7 +58,7 @@ export default {
         this.newMessage = null;
         this.errorText = null;
       } else {
-        this.errorText = "A message must be entered!";
+        this.errorText = "請輸入文字訊息";
       }
     }
   }
