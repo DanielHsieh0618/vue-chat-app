@@ -2,7 +2,11 @@
   <div>
     <v-container class="chat">
       <v-card>
-        <v-toolbar color="primary" dark flat>悄悄話</v-toolbar>
+        <v-toolbar color="primary" dark flat>
+          <v-toolbar-title>悄悄話</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <span class="ml-2">{{name}}</span>
+        </v-toolbar>
         <v-card-text>
           <p class="nomessages text-secondary" v-if="messages.length == 0">[No messages yet!]</p>
           <div class="messages" v-chat-scroll="{always: false, smooth: true}">
@@ -10,10 +14,15 @@
               v-for="message in messages"
               :key="message.id"
               :class="message.active?'right':'left'"
+              class="mb-2"
             >
-              <span class="text-info">[{{ message.name }}]:</span>
-              <span>{{message.message}}</span>
-              <span class="text-secondary time">{{message.timestamp}}</span>
+              <span v-show="!message.active" text class="pr-4">{{ message.name }}</span>
+              <v-tooltip bottom>
+                <template #activator="{on}">
+                  <v-chip v-on="on" class="mr-4">{{message.message}}</v-chip>
+                </template>
+                <span class="text-secondary time">{{message.timestamp}}</span>
+              </v-tooltip>
             </div>
           </div>
         </v-card-text>
